@@ -1,0 +1,124 @@
+
+************************************************MODEL**********************************
+var ContactModel = Backbone.Model.extend({
+
+	urlRoot : 'contact',
+
+	initialize : function() {
+
+	}
+
+});
+
+var BookingModel = Backbone.Model.extend({
+	urlRoot : 'booking',
+
+	initialize : function() {
+
+	}
+});
+
+var FlightsModel = Backbone.Model.extend({
+
+	defaults : {
+		
+		flightnumber : '',
+		from : '',
+		flightcarrier : '',
+		departuredate : '',
+		arrivaltime : '',
+		departuretime : '',
+		to : '',
+		carrierFsCode:'',
+		departureAirportFsCode : '',
+		arrivalAirportFsCode : '',
+		stops : '',
+		arrTime: '',
+		departTime: '',
+		arrDate: '',
+		name: ''
+		
+	},
+
+	initialize : function() {
+		// console.log('Account History Model has been initialized.');
+		// alert("model initialized");
+	}
+});
+
+var newModel;
+
+var ManagerModel = Backbone.Model.extend({
+
+	defaults : {
+		employeeName : '',
+		intinerary : '',
+		flightDetails : '',
+		status : ''
+	},
+
+	initialize : function() {
+		// console.log('Account History Model has been initialized.');
+
+	}
+});
+
+var UserModel = Backbone.Model.extend({
+
+	defaults : {
+		employeeName : '',
+		intinerary : '',
+		flightDetails : '',
+		status : ''
+	},
+
+	initialize : function() {
+		// console.log('Account History Model has been initialized.');
+
+	}
+});
+
+var Register = Backbone.Model.extend({
+
+	schema : {
+		username : 'Text',
+		password : 'Password',
+		confirmpassword : 'Password',
+		firstname : 'Text',
+		lastname : 'Text',
+		securityquestion : {
+			type : 'Select',
+			options : [ '', 'options1',
+					'options2 ', 'option3' ]
+		},
+		answer : 'Text',
+		email : {
+			validators : [ 'required', 'email' ]
+		},
+		address : 'Text',
+		location : {
+			type : 'Select',
+			options : [ '', 'USA', ]
+		},
+		state : {
+			type : 'Select',
+			options : [ 'CA', 'VA', 'TX' ]
+		},
+		city : Text,
+		zip : {
+			length : 5
+		}
+	},
+	/*validate: function(){}*/
+	/*validation: {
+	    email: {
+	      required: true,
+	      pattern: 'email',
+	      msg: 'Please enter a valid email'
+	    }
+	  },
+*/
+	initilize : function() {
+		console.log('Testing backbone form ');
+	}
+});

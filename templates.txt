@@ -1,0 +1,218 @@
+*****************************TEMPLATES**********************************
+var Append_template = 
+	'<div>'+
+			'<div class="resultDiv flightsDiv" id="flights">'+
+				'<div class="rowDiv result shadow" id="prototype">'+
+					'<div class="results price" >'+
+						'<div style="padding-bottom: 30px;" name="price" >$452</div>'+
+						'<div name="buttonDiv"><button class="btn btn-warning">Select</button></div>'+
+					'</div>'+
+					'<div class="airline">'+
+						'<div><img src="images/AA.png"><img src="images/AA.png"></div>'+
+						'<div name="airline">American Airlines</div>'+
+					'</div>'+
+						'<div class="results" name="itinerary">'+
+							'<div>7:00 AM (IAD) - 8:00 PM (SEA)</div>'+
+							'<div class="type">1h:00m &nbsp;&nbsp;&nbsp;&nbsp;one stop</div>'+
+							'<div>7:00 AM (IAD) - 8:00 PM (SEA)</div>'+
+							'<div class="type">1h:00m &nbsp;&nbsp;&nbsp;&nbsp;one stop</div>'+
+						'</div>'+
+				'</div>'+
+			'</div>'+
+	'</div>';
+		
+		
+
+var CreditCardDetails_Template = 
+	'<div id="creditCardDetails" class="contactDiv">' +
+'<div class="lefthalf">'+
+'<div class="register">'+
+
+	'<div>' + 
+	'<label>FirstName:</label>'+
+	'<input type="text" id="creditFirstName" style="width : 40%"></input>'+
+'</div>'+
+	
+	
+	'<div>'+
+		'<label>LastName: </label>'+
+		'<input type="text" id="creditLastName" style="width : 40%"></input>'+
+	'</div>'+
+	
+	
+	'<div>'+
+		'<label>Card Number: </label>'+
+		'<input type="text" id="creditCardNo" style="width : 40%"></input>'+
+	'</div>'+
+	
+	
+		'<div>'+
+		'<label>Card Type :</label>'+
+		'<select style="width : 40%"" id="creditCardType">'+
+		'<option value=""></option>'	+	
+		'<option value="visa">Visa</option>'	+	  
+		'<option value="master">Master</option>'+
+		' <option value="discover">Discover</option>'+		
+		'</select>'	+
+		
+		'</div>'+
+	
+	
+
+	'<div>'+
+	'<label>Expiration Month:</label>'+
+	'<select style="width : 40%"" id="creditMonth">'+
+	'<option value=""></option>'	+	
+	'<option value="January">January</option>'	+	  
+	'<option value="February">February</option>'	+	
+	'<option value="March">March</option>'	+	
+	'<option value="April">April</option>'	+	
+	'<option value="May">May</option>'	+	
+	'<option value="June">June</option>'	+	
+	'<option value="July">July</option>'	+	
+	'<option value="August">August</option>'	+	
+	'<option value="September">September</option>'	+	
+	'<option value="October">October</option>'	+	
+	'<option value="November">November</option>'	+	
+	'<option value="December">December</option>'	+	
+	'</select>'	+
+	
+	'</div>'+
+	
+	'<div>'+
+	'<label>Expiration Year :</label>'+
+	'<select style="width : 40%"" id="creditYear">'+
+	'<option value=""></option>'	+	
+	'<option value="2013">2013</option>'	+	  
+	'<option value="2014">2014</option>'+
+	' <option value="2015">2015</option>'+		
+	'</select>'	+
+	
+	'</div>'+
+	
+	'<div>'+
+		'<label>CVV number: </label>'+
+		'<input type="text" id="creditCvv" style="width : 40%"></input>'+
+	'</div>'+
+	
+	
+	'<div class="buttonDiv">'+
+	'<button class="btn btn-primary btn-lg" style="margin-right: 50px;" id="submit_details_checkout1">Submit</button>'+
+'</div>'+
+
+	
+'</div>'+
+'</div>'+
+'</div>';
+
+
+var flightDetails_template='{{#FlightObjects}}'+
+'<div class="secondDiv resultDiv flightDetails">'+
+'<div class="rowDiv result shadow">'+
+	'<div class="results price" >'+
+		
+		'<div name="buttonDiv"><button name=selectButton class="btn btn-warning">Select</button></div>'+
+	'</div>'+
+	'<div class="airline">'+
+		'<div>Airline:<img class="airlineLogo"src="images/{{carrierFsCode}}.png"<span class="airlineName">{{name}}</span></div><br/>'+
+		'<div name="airline">Flight Number:<strong>{{flightNumber}}</strong></div>'+
+	'</div>'+
+		'<div class="results" name="itinerary">'+
+		'<div>Depart:{{departureAirportFsCode}} Arrival:{{arrivalAirportFsCode}}Stops:{{stops}}</div><br/>'+
+			'<div class="type">  Depart Date : {{departDate}}  Depart Time : {{departTime}}</div>'+
+			'<div class="type">  Arrival Date : {{arrDate}}   Arrival Time : {{arrTime}}</div>'+
+		'</div>'+
+'</div>'+
+'</div>'+
+'</div>'+'{{/FlightObjects}}';
+
+var Manager_Display_Temaplate =
+	
+
+		'<div name="managerViewDiv">'+
+			'<div id="prototype">'+
+			
+			'{{#each models}}'+
+			'<table class="flightTable" style="background-color:#CCCCCC" width="100%" cellpadding="2" cellspacing="3">'+
+			 '<tr>'+
+				'<td>Employee</td>'+
+				'<td>Itinerary</td>'+
+				'<td colspan="2">Status</td>'+
+				'<td>Action</td>'+
+			'</tr>'+	
+			
+			
+			
+		 
+				'<tr class="managerValue">'+
+			        
+							
+			            	'<td>{{attributes.employeeName}}</td>'+
+							'<td class= "itinerary">{{attributes.intinerary}}</td>'+
+							'<td colspan="2" class="statusFlight">{{attributes.status}}</td>'+
+							'<td>'+
+							'<div class="approveButtonDiv" style="display: inline">'+
+							'<button class="btn btn-primary btn-lg" name="manager_approve">Approve</button>'+
+							'</div>'+
+							
+							'<div class="rejectButtonDiv" style="display: inline">'+
+							'<button class="btn btn-primary btn-lg" name="manager_reject" >Reject</button>'+
+							'</div>'+
+							'</td>'+
+								
+						'</tr>'+
+						'<td colspan="5">Itinerary Details</td>'+
+						'<tr>'+
+						
+						'</tr>'+
+						'<table class="itineraryDetails" style="background-color:#CCCCCC" width="100%" cellpadding="2" cellspacing="3">'+
+						'<tr>'+
+						'<th>'+
+						'Flight Number'+
+						'</th>'+
+						'<th>'+
+						'From Location'+
+						'</th>'+
+						'<th>'+
+						'To Location'+
+						'</th>'+
+						'<th>'+
+						'Departure Date'+
+						'</th>'+
+						'<th>'+
+						'Time of Departure'+
+						'</th>'+
+						
+						'</tr>'+
+
+						'{{#each attributes.flightDetails}}'+
+						'<tr>'+
+						'<td>'+
+						'{{flightNo}}'+
+						'</td>'+
+						'<td>'+
+						'{{fromLocation}}'+
+						'</td>'+
+						'<td>'+
+						'{{toLocation}}'+
+						'</td>'+
+						'<td>'+
+						'{{dateOfDetarture}}'+
+						'</td>'+
+						'<td>'+
+						'{{timeOfDeparture}}'+
+						'</td>'+
+						'</tr>'+
+						'{{/each}}'+
+						'</table>'+
+						
+		
+		  
+		'</table>'+
+		'</br>'+
+		
+	     '{{/each}}'+
+			
+			'</div>'+
+			
+		'</div>';

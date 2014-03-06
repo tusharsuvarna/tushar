@@ -1,0 +1,30 @@
+
+*******************************COLLECTION**************************************
+var HomeCollection = Backbone.Collection.extend({
+	model:HomeModel
+});
+
+var home = new HomeCollection();
+
+var ContactCollection = Backbone.Collection.extend({
+	model:ContactModel
+	
+});
+var contact = new ContactCollection();
+
+var BookingCollection = Backbone.Collection.extend({
+	model:BookingModel
+	
+});
+var book = new BookingCollection();
+
+var FlightsCollection = Backbone.Collection.extend({
+	model:FlightsModel
+	
+});
+var collectionFlights = new FlightsCollection;
+
+var ManagerViewCollection = Backbone.Collection.extend({
+	model:ManagerModel
+	
+});

@@ -1,0 +1,81 @@
+
+***************************************************ROUTER****************************************
+var AppRouter = Backbone.Router.extend({
+		routes: {
+		"": "home",
+		"home": "home",
+		"signIn": "signIn",
+		"contact": "contact",
+		"profile" : "profile",
+		"history" : "history" ,
+		"flightdetails" : "flightdetails"
+		/*"register_button": "Register_Form"*/
+	},
+		
+		//Registration form
+		Register_Form: function(){
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			alert('inside Register Form');
+			var Register  = new RegistUser();
+			view = Register;
+		},
+		//login
+		
+		//home
+		home:function(){
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			var homeView=new HomeView();
+			view = homeView;
+		},
+
+		signIn:function()
+		{
+			
+			//$('#Register_Page').modal();
+ 
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			
+			var loginView=new LoginView();
+			
+			  view = loginView;
+		},
+		
+		history:function(){
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			var historyView=new HistoryView();
+			view = historyView;
+		},
+		
+		flightdetails:function()
+		{
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			var flightdetailsView=new FlightDetailsView();
+			  view = flightdetailsView;
+		},
+		
+		contact:function(){
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			var contactView = new ContactView();
+			view = contactView;
+		},
+		
+		profile:function(){
+			if(!(view === undefined || view === null )) {
+				view.cleanup();
+			}
+			var myprofileView = new MyProfileView();
+			view = myprofileView;
+		}
+});

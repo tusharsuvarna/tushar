@@ -1,0 +1,222 @@
+
+*******************************************VIEW*****************************************************************
+
+var LoginView = Backbone.View.extend({
+	el : '.container',
+	events : {
+		'click #signIn' : 'nextpage',
+		'click #register_button' : 'display',
+		'click #register_two' : 'validateForm',
+		'click #forgotPassword' : 'forgotPassword',
+		'click #search' : 'searchFlights',
+		'click #recoverPassword' : 'recoverPassword' 
+	},
+	initialize : function() {
+		this.render();
+
+	},
+	render : function() {
+		var template = Handlebars.compile(Sign_Template);
+		this.$el.html(template);
+		return this;
+	},
+	display : function() {
+		$("#Register_Page").toggle('slow');
+
+	},
+	nextpage : function(event) {
+		usrName = $("input[name='username']").val();
+		pwd = $("input[name='password']").val();
+		if ($("input[name='username']").val() === "") {
+			alert("Please enter Username !!");
+			$("input[name='username']").focus();
+		} else if ($("input[name='password']").val() === "") {
+			alert("Please enter password !!");
+			$("input[name='password']").focus();
+		} else {
+			$
+					.ajax({
+						type : "POST",
+						dataType : "JSON",
+						data : {
+							username : usrName,
+							password : pwd
+						},
+						url : "SignIn",
+						success : function(data) {
+							if (data != null) {
+								sessionStorage.firstName = data.firstName;
+								sessionStorage.lastName = data.lastName;
+								sessionStorage.username = data.username;
+								sessionStorage.state = data.state;
+								sessionStorage.zip = data.zip;
+								var login = $("#login");
+								$(login).html("Logout");
+								$(login).attr("href","clearSession()");
+								$(".welcome").html("Welcome " + sessionStorage.firstName + " " + sessionStorage.lastName + "!");
+							}
+							if(sessionStorage.hits === undefined) {
+								sessionStorage.hits = 1;
+							} else {
+								sessionStorage.hits = sessionStorage.hits + 1;
+							}
+						},
+						error : function(xhr, status, error) {
+							$("#errorMessage").html("Please enter correct user ID or password");
+							$("#login").text("Login");
+						}
+					});
+
+		}
+	},
+	validateForm: function(event)
+	
+	{
+	  var flag = true;
+	  var Address1 = $("#address1").val();
+	  var Address2 = $("#address2").val();
+	  var Sec1 = $("#security-question1").val();
+	  var Sec2 = $("#security-question2").val();
+	  var Ans1 = $("#answer1").val();
+	  var Ans2 = $("#answer2").val();
+	  var Country = $("#location-country").val();
+	 
+    alert($("#answer1").val());
+    
+    
+	var UserName= $("#username").val();
+	if (UserName==null || UserName=="")
+	  {
+		alert("Please enter username");
+		flag = false;
+	  }
+	
+	
+	var Password=$("#password").val();
+	if (Password==null || Password=="")
+	  {
+	  alert("Please enter password");
+	 // return false; flag = false;
+	  }
+	
+	
+	var ConfirmPassword=$("#confirmpassword").val();
+			/*alert(confirmpassword+"confirm");
+			alert(ConfirmPassword+"CONFIRM");*/
+		
+	if (ConfirmPassword==null || ConfirmPassword=="" || $("#confirmpassword").val()!=$("#password").val())
+	  {
+	  alert("Please type the same password for both the fields confirm and password");
+	 // return false; flag = false;
+	  }
+	
+	var FirstName=$("#firstname").val();
+	if (FirstName==null || FirstName=="" || !(FirstName.match(/^[a-zA-Z_]+$/)))
+	  {
+		alert("Numbers are not allwed for first name");
+	  flag = false;
+	  }
+	
+	
+	var LastName=$("#lastname").val();
+	alert(LastName+" :  is the vale of the last name ");
+	if (LastName==null || LastName=="")
+	  {
+		alert("Please enter last name");
+	  flag = false;
+	  }
+	
+	var State=$("#location-state").val();
+	if (State==null || State=="" || !(State.match(/^[a-zA-Z_]+$/)))
+	  {
+		alert("Numbers not allowed for state");
+	  flag = false;
+	  }
+	
+	var City=$("#location-city").val();
+	if (City==null || City=="" || !(City.match(/^[a-zA-Z_]+$/)))
+	  {
+		alert("Numbers are not allowed for city");
+	 // return false;
+	  flag = false;
+	  }
+	
+	var Zip=$("#zip").val();
+	if (Zip==null || Zip=="" || !(Zip.match(/^[0-9]+$/)))
+	  {
+		alert("Zip must be filled out with only numbers ");
+	  
+	 // return false;
+	  flag = false;
+	  }  
+	if
+	(flag == true)
+		{
+		$.ajax({  
+		    type: "POST",  
+		    url: "Register",  
+		    data:  {username : UserName,password: Password, firstname: FirstName, lastname: LastName,address1: Address1, address2:Address2, city:City,state:State,country:Country,answer1:Ans1,answer2:Ans2,zip:Zip,securityq1:Sec1,securityq2:Sec2}, 
+		    success: function(){ 		
+		    	alert("User registered successfully");
+		    }                
+		  });
+		
+			
+		
+		}
+      },
+    forgotPassword: function() {
+    	$("#forgotPassword_template").toggle('slow');
+    },
+	recoverPassword: function(){
+		var userData = {
+				username : null,
+				question1 : null,
+				answer1 : null,
+				question2 : null,
+				answer2 : null
+		};
+		userData.username = document.querySelector("#forgotPassword_template input[name='username']").value;
+		userData.answer1 = document.querySelector("#forgotPassword_template input[name='answer1']").value;
+		userData.answer2 = document.querySelector("#forgotPassword_template input[name='answer2']").value;
+		var question1 = document.querySelector("#forgotPassword_template select[name='SecurityQuestion1']");
+		userData.question1 = question1.options[question1.selectedIndex].text;
+		var question2 = document.querySelector("#forgotPassword_template select[name='SecurityQuestion2']");
+		userData.question2 = question2.options[question2.selectedIndex].text;
+		var jsonData = JSON.stringify(userData);
+		$.ajax({  
+		    type: "POST",  
+		    url: "ForgotPassword",  
+		    dataType: 'JSON',
+		    data:  {jsonData : jsonData}, 
+		    success: function(data){ 		
+		    	if(data === null) {
+		    		document.querySelector("#message").innerHTML("Please enter correct username, security questions and answers");
+		    	} else {
+		    		alert(data);
+		    	}
+		    }                
+		  });
+	}
+});
+
+var ContactView=Backbone.View.extend({
+    el:'.container',
+    
+    initialize: function(){
+    	this.render();
+	},
+	el:'.container',
+	
+	initialize : function(){
+		this.render();
+	},
+	
+	render: function(){
+		
+		var template = Handlebars.compile(Contact_Template);
+		this.$el.html(template);
+		return this;
+	}
+});
+
